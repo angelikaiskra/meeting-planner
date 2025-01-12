@@ -1,0 +1,46 @@
+model MeetingPoll {
+  id          Int                  @id @default(autoincrement())
+  title       String
+  description String?
+  createdAt   DateTime?            @default(now())
+  updatedAt   DateTime?            @updatedAt
+  user        User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      Int
+  times       MeetingTime[]
+  settings    MeetingPollSettings?
+}
+
+model MeetingPollSettings {
+  id                Int         @id @default(autoincrement())
+  allowOnlyOneVote  Boolean?    @default(false)
+  allowMaybeAnswer  Boolean?    @default(false)
+  hideOthersAnswers Boolean?    @default(false)
+  voteDeadline      DateTime?
+  timezone          String?
+  poll              MeetingPoll @relation(fields: [pollId], references: [id])
+  pollId            Int         @unique
+}
+
+model MeetingTime {
+  id           Int         @id @default(autoincrement())
+  proposedTime DateTime
+  poll         MeetingPoll @relation(fields: [pollId], references: [id])
+  pollId       Int
+  Votes        Vote[]
+}
+
+model Vote {
+  id            Int         @id @default(autoincrement())
+  user          User        @relation(fields: [userId], references: [id])
+  userId        Int
+  meetingTime   MeetingTime @relation(fields: [meetingTimeId], references: [id])
+  meetingTimeId Int
+  vote          VoteType
+  createdAt     DateTime?   @default(now())
+}
+
+enum VoteType {
+  YES
+  NO
+  MAYBE
+}
