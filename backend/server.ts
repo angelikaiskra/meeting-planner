@@ -1,11 +1,11 @@
 // Entry point of the backend server
 import express from 'express';
 import cors from 'cors';
+import {PrismaClient} from '@prisma/client'
 
-import prisma from "./db/index.ts";
-
-const app = express();
 const PORT = process.env.PORT || 3001;
+const app = express();
+const prisma = new PrismaClient();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -25,6 +25,7 @@ app.get('/users', async (req: express.Request, res: express.Response) => {
   res.json(users);
 });
 
+// Error handling middleware
 app.use((err: express.Error, req: express.Request, res: express.Response) => {
   if (err instanceof Error) {
     return res.status(400).json({
