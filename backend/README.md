@@ -1,5 +1,5 @@
 # meeting-poll Backend
-This is the backend of the meeting-poll MERN project.
+This is the backend of the meeting-poll project.
 
 ## Setup
 

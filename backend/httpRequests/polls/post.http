@@ -1,0 +1,25 @@
+### Create a new poll
+POST http://localhost:{{BACKEND_PORT}}/api/polls
+Content-Type: application/json
+
+{
+  "title":  "Poll title",
+  "description":  "Poll description",
+  "proposedTimes": [
+    {
+      "proposedTimeStart": "2025-01-14T00:00:00.000Z",
+      "proposedTimeEnd": "2025-01-14T23:59:59.999Z"
+    },
+    {
+      "proposedTimeStart": "2025-01-14T12:00:00.000Z",
+      "proposedTimeEnd": "2025-01-14T13:00:00.000Z"
+    }
+  ],
+  "settings": {
+    "allowOnlyOneVote": false,
+    "allowMaybeAnswer": true,
+    "hideOthersAnswers": false,
+    "voteDeadline": "2025-02-14T12:00:00.000Z",
+    "timezone": "Europe/Warsaw"
+  }
+}

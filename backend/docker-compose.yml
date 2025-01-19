@@ -1,0 +1,38 @@
+# version: "3.8"
+
+services:
+  node-app:
+    build: .
+    container_name: meeting-poll-backend
+    image: node-app
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    networks:
+      - node-network
+
+  postgres:
+    image: postgres
+    restart: always
+    container_name: meeting-poll-db
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - node-network
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  node-network:
+    driver: bridge

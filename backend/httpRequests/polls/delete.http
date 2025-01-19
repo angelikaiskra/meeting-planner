@@ -1,0 +1,3 @@
+### Delete poll with id 1
+DELETE http://localhost:{{BACKEND_PORT}}/api/polls/1
+Content-Type: application/json

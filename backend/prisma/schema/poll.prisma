@@ -1,0 +1,49 @@
+// TODO: change poll and pollId to meetingPoll and meetingPollId
+
+model MeetingPoll {
+  id            Int                  @id @default(autoincrement())
+  title         String
+  description   String?
+  createdAt     DateTime?            @default(now())
+  updatedAt     DateTime?            @updatedAt
+  user          User?                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        Int?
+  proposedTimes MeetingTime[]
+  settings      MeetingPollSettings?
+}
+
+model MeetingPollSettings {
+  id                Int         @id @default(autoincrement())
+  allowOnlyOneVote  Boolean?    @default(false)
+  allowMaybeAnswer  Boolean?    @default(false)
+  hideOthersAnswers Boolean?    @default(false)
+  voteDeadline      DateTime?
+  timezone          String?
+  poll              MeetingPoll @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  pollId            Int         @unique
+}
+
+model MeetingTime {
+  id                Int         @id @default(autoincrement())
+  proposedTimeStart DateTime
+  proposedTimeEnd   DateTime
+  poll              MeetingPoll @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  pollId            Int
+  votes             Vote[]
+}
+
+model Vote {
+  id            Int         @id @default(autoincrement())
+  user          User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId        Int?
+  meetingTime   MeetingTime @relation(fields: [meetingTimeId], references: [id], onDelete: Cascade)
+  meetingTimeId Int
+  vote          VoteType
+  createdAt     DateTime?   @default(now())
+}
+
+enum VoteType {
+  YES
+  NO
+  MAYBE
+}

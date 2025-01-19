@@ -1,0 +1,3 @@
+### GET all polls
+GET http://localhost:{{BACKEND_PORT}}/api/polls
+Accept: application/json

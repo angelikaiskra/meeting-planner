@@ -6,7 +6,7 @@ model User {
   role         Role          @default(GUEST)
   createdAt    DateTime?     @default(now())
   meetingPolls MeetingPoll[]
-  vote         Vote[]
+  votes        Vote[]
 }
 
 enum Role {

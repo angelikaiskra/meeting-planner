@@ -1,0 +1,8 @@
+### Update poll with id 1
+PATCH http://localhost:{{BACKEND_PORT}}/api/polls/1
+Content-Type: application/json
+
+{
+  "title":  "Poll title UPDATED",
+  "description":  "Poll description UPDATED"
+}
