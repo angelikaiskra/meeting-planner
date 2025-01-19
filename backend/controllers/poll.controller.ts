@@ -5,8 +5,8 @@ import ApiError from '../utils/ApiError';
 
 const createMeetingPoll = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { title, description, proposedTimes, settings } = req.body;
-    const poll = await pollService.createMeetingPoll(title, description, proposedTimes, settings);
+    const { title, description, timezone, options, settings } = req.body;
+    const poll = await pollService.createMeetingPoll(title, description, timezone, options, settings);
     res.status(httpStatus.CREATED).send(poll);
   } catch (error) {
     next(error);

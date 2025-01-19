@@ -1,5 +1,4 @@
 import prisma from '../client';
-// import ApiError from '../utils/ApiError';
 import { QueryResult } from '../types/utils.interface';
 import { MeetingPoll } from '@prisma/client';
 import { MeetingPollSettings, MeetingTime } from '../types/poll.interface';
@@ -11,21 +10,24 @@ import httpStatus from 'http-status';
  * @returns {Promise<MeetingPoll>}
  * @param title
  * @param description
- * @param proposedTimes
+ * @param timezone
+ * @param options
  * @param settings
  */
 const createMeetingPoll = async (
   title: string,
   description: string,
-  proposedTimes: MeetingTime[],
+  timezone: string,
+  options: MeetingTime[],
   settings: MeetingPollSettings
 ): Promise<MeetingPoll> => {
   return prisma.meetingPoll.create({
     data: {
       title,
       description,
-      proposedTimes: {
-        create: proposedTimes
+      timezone,
+      options: {
+        create: options
       },
       settings: {
         create: settings
@@ -106,11 +108,9 @@ const updateMeetingPollById = async (pollId: number, data: any): Promise<Meeting
  */
 const deleteMeetingPollById = async (pollId: number): Promise<void> => {
   const meetingPoll = await getMeetingPollById(pollId);
-  console.log("meetingPoll", meetingPoll);
   if (!meetingPoll) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Meeting poll not found');
   }
-  console.log("throw new ApiError");
 
   await prisma.meetingPoll.delete({
     where: {

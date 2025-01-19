@@ -1,15 +1,20 @@
+import { MeetingPollOptionType } from '@prisma/client';
+
 export interface MeetingPoll {
   id: number,
   userId?: number,
   title: string,
+  timezone: string,
   description: string,
-  proposedTimes: MeetingTime[],
+  options: MeetingTime[],
   settings: MeetingPollSettings,
 }
 
 export interface MeetingTime {
-  proposedTimeStart: Date,
-  proposedTimeEnd: Date,
+  type: MeetingPollOptionType,
+  start_time?: Date,
+  end_time?: Date,
+  date?: string,
 }
 
 export interface MeetingPollSettings {
@@ -17,13 +22,13 @@ export interface MeetingPollSettings {
   allowMaybeAnswer?: boolean,
   hideOthersAnswers?: boolean,
   voteDeadline?: Date,
-  timezone?: string,
 }
 
 // Requests
 export interface CreateMeetingPollRequest {
   title: string;
   description: string;
-  proposedTimes: MeetingTime[];
+  timezone: string;
+  options: MeetingTime[];
   settings: MeetingPollSettings;
 }
