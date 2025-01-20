@@ -2,11 +2,13 @@
 import express from 'express';
 import httpStatus from 'http-status';
 import cors from 'cors';
+import passport from 'passport';
 
 import ApiError from './utils/ApiError';
 import errorHandler from './middlewares/error';
 import { rateLimiter } from './middlewares/rateLimiter';
 import routes from './routes';
+import jwtStrategy from './config/passport';
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -21,11 +23,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.options('*', cors());
 
+// jwt authentication
+app.use(passport.initialize());
+passport.use('jwt', jwtStrategy);
+
 // limit requests
 app.use(rateLimiter);
 
 // Routes and middleware
-app.use('/api', routes);
+app.use('/api', routes);  
 
 // Test route to check connection to database
 // app.get('/', async (req: express.Request, res: express.Response, next: NextFunction) => {

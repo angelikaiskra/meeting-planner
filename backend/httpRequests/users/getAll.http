@@ -1,0 +1,3 @@
+### GET all users
+GET http://localhost:{{BACKEND_PORT}}/api/users
+Accept: application/json

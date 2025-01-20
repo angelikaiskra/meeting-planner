@@ -5,21 +5,22 @@ Content-Type: application/json
 {
   "title":  "Poll title",
   "description":  "Poll description",
-  "proposedTimes": [
+  "timezone":  "Europe/Warsaw",
+  "options": [
     {
-      "proposedTimeStart": "2025-01-14T00:00:00.000Z",
-      "proposedTimeEnd": "2025-01-14T23:59:59.999Z"
+      "type": "TIME_RANGE",
+      "startTime": "2025-01-14T00:00:00.000Z",
+      "endTime": "2025-01-14T23:59:59.999Z"
     },
     {
-      "proposedTimeStart": "2025-01-14T12:00:00.000Z",
-      "proposedTimeEnd": "2025-01-14T13:00:00.000Z"
+      "type": "DATE",
+      "date": "2025-01-14"
     }
   ],
   "settings": {
     "allowOnlyOneVote": false,
     "allowMaybeAnswer": true,
     "hideOthersAnswers": false,
-    "voteDeadline": "2025-02-14T12:00:00.000Z",
-    "timezone": "Europe/Warsaw"
+    "voteDeadline": "2025-02-14T12:00:00.000Z"
   }
 }

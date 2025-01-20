@@ -1,0 +1,3 @@
+### Delete user with id 1
+DELETE http://localhost:{{BACKEND_PORT}}/api/users/2
+Content-Type: application/json

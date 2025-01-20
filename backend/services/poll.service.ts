@@ -87,7 +87,7 @@ const getMeetingPollById = async (pollId: number): Promise<MeetingPoll | null> =
  * @returns {Promise<MeetingPoll>}
  */
 // TODO: Add type for data
-const updateMeetingPollById = async (pollId: number, data: any): Promise<MeetingPoll> => {
+const updateMeetingPoll = async (pollId: number, data: Partial<MeetingPoll>): Promise<MeetingPoll> => {
   const meetingPoll = await getMeetingPollById(pollId);
   if (!meetingPoll) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Meeting poll not found');
@@ -123,6 +123,6 @@ export default {
   createMeetingPoll,
   queryMeetingPolls,
   getMeetingPollById,
-  updateMeetingPollById,
+  updateMeetingPoll,
   deleteMeetingPollById
 };

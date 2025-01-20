@@ -6,6 +6,7 @@ model MeetingPoll {
   status      MeetingPollStatus    @default(OPEN)
   user        User?                @relation(fields: [userId], references: [id])
   userId      Int?
+  guestId     Int?
   options     MeetingPollOption[]
   settings    MeetingPollSettings?
   createdAt   DateTime?            @default(now())

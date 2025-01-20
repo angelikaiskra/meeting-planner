@@ -38,7 +38,7 @@ const getMeetingPoll = async (req: Request, res: Response, next: NextFunction) =
 
 const updateMeetingPoll = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const updatedMeetingPoll = await pollService.updateMeetingPollById(+req.params.pollId, req.body);
+    const updatedMeetingPoll = await pollService.updateMeetingPoll(+req.params.pollId, req.body);
     res.send(updatedMeetingPoll);
   } catch (error) {
     next(error);

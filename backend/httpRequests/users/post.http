@@ -1,0 +1,9 @@
+### Create a new user
+POST http://localhost:{{BACKEND_PORT}}/api/users
+Content-Type: application/json
+
+{
+  "email":  "angelina.jolie@test.com",
+  "name":  "Angelina Jolie",
+  "password":  "Qwerty123"
+}
