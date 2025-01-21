@@ -1,16 +1,16 @@
 import express from 'express';
-// import auth from '../middlewares/auth';
 import userController from '../controllers/user.controller';
+import auth from '../middlewares/auth';
 
 const router = express.Router();
 
 router.route('/')
-  .post(userController.createUser)
-  .get(userController.getUsers);
+  .post(auth(), userController.createUser)
+  .get(auth(), userController.getUsers);
 
 router.route('/:userId')
-  .get(userController.getUser)
-  .patch(userController.updateUser)
-  .delete(userController.deleteUser);
+  .get(auth(), userController.getUser)
+  .patch(auth(), userController.updateUser)
+  .delete(auth(), userController.deleteUser);
 
 export default router;

@@ -1,0 +1,7 @@
+### Refresh tokens
+POST http://localhost:{{BACKEND_PORT}}/api/auth/refresh-tokens
+Content-Type: application/json
+
+{
+  "refreshToken": "{{REFRESH_TOKEN}}"
+}

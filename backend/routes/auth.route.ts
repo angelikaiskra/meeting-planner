@@ -1,16 +1,10 @@
 import express from 'express';
-// import auth from '../middlewares/auth';
-// import userController from '../controllers/auth.controller';
-
+import authController from '../controllers/auth.controller';
 const router = express.Router();
 
-// router.route('/')
-//   .post(auth('manageUsers'), userController.createUser)
-//   .get(auth('getUsers'), userController.getUsers);
-//
-// router.route('/:userId')
-//   .get(auth('getUsers'), userController.getUser)
-//   .patch(auth('manageUsers'), userController.updateUser)
-//   .delete(auth('manageUsers'), userController.deleteUser);
+router.post('/register', authController.register);
+router.post('/login', authController.login);
+router.post('/logout', authController.logout);
+router.post('/refresh-tokens', authController.refreshTokens);
 
 export default router;

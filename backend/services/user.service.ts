@@ -101,18 +101,12 @@ const getUserById = async (userId: number): Promise<Partial<User> | null> => {
 /**
  * Retrieves a user by their email.
  * @param {string} email - The email of the user.
- * @returns {Promise<Partial<User> | null>} The user if found, otherwise null.
+ * @returns {Promise<User | null>} The user if found, otherwise null.
  */
-const getUserByEmail = async (email: string): Promise<Partial<User> | null> => {
+const getUserByEmail = async (email: string): Promise<User | null> => {
   return prisma.user.findUnique({
     where: {
       email: email
-    },
-    select: {
-      id: true,
-      email: true,
-      name: true,
-      createdAt: true
     }
   });
 };

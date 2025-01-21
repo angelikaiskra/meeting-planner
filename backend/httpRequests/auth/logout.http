@@ -1,0 +1,7 @@
+### Log out user
+POST http://localhost:{{BACKEND_PORT}}/api/auth/logout
+Content-Type: application/json
+
+{
+  "refreshToken": "{{REFRESH_TOKEN}}"
+}

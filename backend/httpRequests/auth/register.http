@@ -1,0 +1,8 @@
+### Register a new user
+POST http://localhost:{{BACKEND_PORT}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email":  "angelina.jolie3@test.com",
+  "password":  "Qwerty123"
+}

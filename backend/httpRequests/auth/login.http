@@ -1,0 +1,8 @@
+### Login user
+POST http://localhost:{{BACKEND_PORT}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email":  "angelina.jolie3@test.com",
+  "password":  "Qwerty123"
+}
