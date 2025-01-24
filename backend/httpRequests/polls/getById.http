@@ -1,3 +1,4 @@
 ### GET poll by ID
-GET http://localhost:{{BACKEND_PORT}}/api/polls/3
+GET http://localhost:{{BACKEND_PORT}}/api/polls/24/{{GUEST_UUID}}
 Accept: application/json
+Authorization: Bearer {{ACCESS_TOKEN}}

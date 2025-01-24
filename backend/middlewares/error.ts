@@ -14,6 +14,8 @@ const errorHandler = (err: any, req: Request, res: Response, next: NextFunction)
         err = new ApiError(statusCode, message, err.stack);
     }
 
+    console.log(err);
+
     const response = {
         statusCode: err.statusCode,
         message: err.message,

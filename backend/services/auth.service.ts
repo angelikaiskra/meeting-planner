@@ -25,9 +25,11 @@ const loginUserWithEmailAndPassword = async (
 
   return {
     id: user.id,
+    uuid: user.uuid,
     email: user.email,
     name: user.name,
-    createdAt: user.createdAt
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt
   };
 };
 

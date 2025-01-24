@@ -1,9 +1,10 @@
 ### Create a new poll
 POST http://localhost:{{BACKEND_PORT}}/api/polls
 Content-Type: application/json
+Authorization: Bearer {{ACCESS_TOKEN}}
 
 {
-  "title":  "Poll title",
+  "title":  "Poll title LOGGED IN",
   "description":  "Poll description",
   "timezone":  "Europe/Warsaw",
   "options": [

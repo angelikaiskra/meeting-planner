@@ -1,0 +1,9 @@
+### Add new vote to a poll
+POST http://localhost:{{BACKEND_PORT}}/api/polls/24/vote/{{GUEST_UUID}}
+Content-Type: application/json
+Authorization: Bearer {{ACCESS_TOKEN}}
+
+{
+  "optionId": 47,
+  "vote":  "YES"
+}

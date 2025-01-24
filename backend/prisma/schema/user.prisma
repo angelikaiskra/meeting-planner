@@ -1,5 +1,6 @@
 model User {
   id           Int           @id @default(autoincrement())
+  uuid         String        @default(uuid())
   email        String        @unique
   name         String?
   password     String
@@ -25,5 +26,4 @@ enum TokenType {
   ACCESS
   REFRESH
   RESET_PASSWORD
-  VERIFY_EMAIL
 }

@@ -1,8 +1,10 @@
 ### Update poll with id 1
-PATCH http://localhost:{{BACKEND_PORT}}/api/polls/1
+PATCH http://localhost:{{BACKEND_PORT}}/api/polls/24
 Content-Type: application/json
+#Authorization: Bearer {{ACCESS_TOKEN}}
 
 {
   "title":  "Poll title UPDATED",
-  "description":  "Poll description UPDATED"
+  "description":  "Poll description UPDATED",
+  "uuid": "6212ca3c-a4e0-4c80-bb15-d33ddadcc812"
 }

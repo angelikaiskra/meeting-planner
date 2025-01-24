@@ -29,9 +29,11 @@ const createUser = async (email: string, password: string, name?: string): Promi
     },
     select: {
       id: true,
+      uuid: true,
       email: true,
       name: true,
-      createdAt: true
+      createdAt: true,
+      updatedAt: true
     }
   });
 };
@@ -64,9 +66,11 @@ const queryUsers = async (options: {
     orderBy: sortBy ? { [sortBy]: sortType } : undefined,
     select: {
       id: true,
+      uuid: true,
       email: true,
       name: true,
-      createdAt: true
+      createdAt: true,
+      updatedAt: true
     }
   });
 
@@ -91,9 +95,11 @@ const getUserById = async (userId: number): Promise<Partial<User> | null> => {
     },
     select: {
       id: true,
+      uuid: true,
       email: true,
       name: true,
-      createdAt: true
+      createdAt: true,
+      updatedAt: true
     }
   });
 };
@@ -134,9 +140,11 @@ const updateUser = async (userId: number, updateBody: Prisma.UserUpdateInput): P
     },
     select: {
       id: true,
+      uuid: true,
       email: true,
       name: true,
-      createdAt: true
+      createdAt: true,
+      updatedAt: true
     },
     data: updateBody
   });

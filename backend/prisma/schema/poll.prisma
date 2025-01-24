@@ -4,9 +4,9 @@ model MeetingPoll {
   description String?
   timezone    String?
   status      MeetingPollStatus    @default(OPEN)
+  ownerUuid   String               @default(uuid())
   user        User?                @relation(fields: [userId], references: [id])
   userId      Int?
-  guestId     Int?
   options     MeetingPollOption[]
   settings    MeetingPollSettings?
   createdAt   DateTime?            @default(now())
@@ -35,13 +35,15 @@ model MeetingPollOption {
 }
 
 model Vote {
-  id            Int               @id @default(autoincrement())
-  user          User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
-  userId        Int?
-  meetingTime   MeetingPollOption @relation(fields: [meetingTimeId], references: [id], onDelete: Cascade)
-  meetingTimeId Int
-  vote          VoteType
-  createdAt     DateTime?         @default(now())
+  id              Int               @id @default(autoincrement())
+  user            User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId          Int?
+  guestUuid       String?
+  guestName       String?
+  meetingOption   MeetingPollOption @relation(fields: [meetingOptionId], references: [id], onDelete: Cascade)
+  meetingOptionId Int
+  vote            VoteType
+  createdAt       DateTime?         @default(now())
 }
 
 enum VoteType {
