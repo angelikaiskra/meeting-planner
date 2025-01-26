@@ -1,8 +1,0 @@
-### Update user with id 1
-PATCH http://localhost:{{BACKEND_PORT}}/api/users/1
-Content-Type: application/json
-Authorization: Bearer {{ACCESS_TOKEN}}
-
-{
-  "email":  "angelina.jolie2@test.com"
-}

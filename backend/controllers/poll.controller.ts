@@ -30,7 +30,7 @@ const queryMeetingPolls = async (req: Request, res: Response, next: NextFunction
     const ownerUuid =  user ? user.uuid : req.query.uuid as string;
 
     if (!ownerUuid) {
-      throw new ApiError(httpStatus.NOT_FOUND, 'No meeting polls found');
+      throw new ApiError(httpStatus.UNAUTHORIZED, 'You need to log in or send your guest UUID in order to query polls');
     }
 
     const meetingPolls = await pollService.queryMeetingPolls(ownerUuid, options);
@@ -64,7 +64,7 @@ const getMeetingPoll = async (req: Request, res: Response, next: NextFunction) =
 const updateMeetingPoll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User || null;
-    const ownerUuid =  user ? user.uuid : req.body.uuid;
+    const ownerUuid =  user ? user.uuid : req.params.uuid;
 
     if (!ownerUuid) {
       throw new ApiError(httpStatus.UNAUTHORIZED, 'You don\'t have access to this poll');

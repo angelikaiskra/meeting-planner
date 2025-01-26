@@ -1,4 +1,4 @@
 ### GET all polls
-GET http://localhost:{{BACKEND_PORT}}/api/polls/{{GUEST_UUID}}
+GET http://localhost:{{BACKEND_PORT}}/api/polls/?uuid={{GUEST_UUID}}
 Accept: application/json
-Authorization: Bearer {{ACCESS_TOKEN}}
+#Authorization: Bearer {{ACCESS_TOKEN}}

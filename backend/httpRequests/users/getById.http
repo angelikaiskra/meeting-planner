@@ -1,4 +1,0 @@
-### GET user by ID
-GET http://localhost:{{BACKEND_PORT}}/api/users/2
-Accept: application/json
-Authorization: Bearer {{ACCESS_TOKEN}}

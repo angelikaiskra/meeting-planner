@@ -1,20 +1,22 @@
 import express from 'express';
 import pollController from '../controllers/poll.controller';
 import { guestAuth } from '../middlewares/auth';
+import validate from '../middlewares/validate';
+import pollValidation from '../validations/poll.validation';
 
 const router = express.Router();
 
 router.route('/')
-  .post(guestAuth(), pollController.createMeetingPoll)
-  .get(guestAuth(), pollController.queryMeetingPolls);
+  .post(guestAuth(), validate(pollValidation.createMeetingPoll), pollController.createMeetingPoll)
+  .get(guestAuth(), validate(pollValidation.queryMeetingPolls), pollController.queryMeetingPolls);
 
 router.route('/:pollId/:uuid?')
-  .get(guestAuth(), pollController.getMeetingPoll)
-  .patch(guestAuth(), pollController.updateMeetingPoll)
-  .delete(guestAuth(), pollController.deleteMeetingPoll);
+  .get(guestAuth(), validate(pollValidation.getMeetingPoll), pollController.getMeetingPoll)
+  .patch(guestAuth(), validate(pollValidation.updateMeetingPoll), pollController.updateMeetingPoll)
+  .delete(guestAuth(), validate(pollValidation.deleteMeetingPoll), pollController.deleteMeetingPoll);
 
 router.route('/:pollId/vote/:uuid?')
-  .post(guestAuth(), pollController.addVoteToMeetingPoll)
+  .post(guestAuth(), validate(pollValidation.addVoteToMeetingPoll), pollController.addVoteToMeetingPoll)
   // .patch(guestAuth(), pollController.editVoteInMeetingPoll);
 
 export default router;
