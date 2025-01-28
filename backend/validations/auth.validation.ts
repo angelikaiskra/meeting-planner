@@ -3,7 +3,7 @@ import Joi from 'joi';
 const register = {
   body: Joi.object().keys({
     email: Joi.string().required().email().max(254),
-    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
+    password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')).min(8).max(128),
   })
 };
 

@@ -12,8 +12,8 @@ export interface MeetingPoll {
 
 export interface MeetingTime {
   type: MeetingPollOptionType,
-  start_time?: Date,
-  end_time?: Date,
+  startTime?: string,
+  endTime?: string,
   date?: string,
 }
 
@@ -21,7 +21,7 @@ export interface MeetingPollSettings {
   allowOnlyOneVote?: boolean,
   allowMaybeAnswer?: boolean,
   hideOthersAnswers?: boolean,
-  voteDeadline?: Date,
+  voteDeadline?: string,
 }
 
 // Requests

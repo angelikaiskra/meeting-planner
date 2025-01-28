@@ -7,10 +7,10 @@ import authService from '../services/auth.service';
 const register = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { email, password } = req.body;
-    const { id, name } = await userService.createUser(email, password);
+    const { id, uuid, name } = await userService.createUser(email, password);
     const tokens = await tokenService.generateAuthTokens(id as number);
 
-    res.status(httpStatus.CREATED).send({ user: { id, email, name }, tokens });
+    res.status(httpStatus.CREATED).send({ user: { id, uuid, email, name }, tokens });
   } catch (error) {
     next(error);
   }

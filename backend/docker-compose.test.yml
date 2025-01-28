@@ -3,8 +3,7 @@ version: "3.8"
 services:
   node-app:
     build: .
-    container_name: meeting-poll-backend
-    command: yarn dev
+    container_name: meeting-poll-backend-test
     image: node-app
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
@@ -18,7 +17,7 @@ services:
   postgres:
     image: postgres
     restart: always
-    container_name: meeting-poll-db
+    container_name: meeting-poll-db-test
     ports:
       - "${DB_PORT}:${DB_PORT}"
     environment:

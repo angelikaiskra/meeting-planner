@@ -4,3 +4,8 @@ export interface QueryResult<QueryObject> {
   page: number;
   limit: number;
 }
+
+export interface NewUser {
+  email: string;
+  password: string;
+}

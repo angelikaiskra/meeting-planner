@@ -31,18 +31,7 @@ passport.use('jwt', jwtStrategy);
 app.use(rateLimiter);
 
 // Routes and middleware
-app.use('/api', routes);  
-
-// Test route to check connection to database
-// app.get('/', async (req: express.Request, res: express.Response, next: NextFunction) => {
-  // try {
-  //   await prisma.$queryRaw`SELECT 1`;
-  //   res.status(200).json({ message: 'Database connection is successful' });
-  // } catch (err: unknown) {
-  //   console.error(err);
-  //   res.status(500).json({ success: false, error: err });
-  // }
-// });
+app.use('/api', routes);
 
 // send back a 404 error for unknown api request
 app.use((req, res, next) => {
@@ -53,8 +42,11 @@ app.use((req, res, next) => {
 app.use(errorHandler);
 
 // start express server
-app.listen(PORT, () => {
-  console.log(`Server is up and running at http://localhost:${PORT} 🚀`);
-});
+// do not explicitly listen on a port when running tests
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`Server is up and running at http://localhost:${PORT} 🚀`);
+  });
+}
 
 export { app };
