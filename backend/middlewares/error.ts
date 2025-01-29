@@ -3,6 +3,7 @@ import httpStatus from 'http-status';
 import { Prisma } from '@prisma/client';
 
 import ApiError from "../utils/ApiError";
+import logger from '../config/logger';
 
 const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
     if (!(err instanceof ApiError)) {
@@ -14,7 +15,9 @@ const errorHandler = (err: any, req: Request, res: Response, next: NextFunction)
         err = new ApiError(statusCode, message, err.stack);
     }
 
-    // console.log(err);
+    if (process.env.NODE_ENV === 'development') {
+        logger.error(err);
+    }
 
     const response = {
         statusCode: err.statusCode,

@@ -28,7 +28,9 @@ app.use(passport.initialize());
 passport.use('jwt', jwtStrategy);
 
 // limit requests
-app.use(rateLimiter);
+if (process.env.NODE_ENV !== 'test') {
+  app.use(rateLimiter);
+}
 
 // Routes and middleware
 app.use('/api', routes);

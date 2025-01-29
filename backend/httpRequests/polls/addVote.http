@@ -1,10 +1,10 @@
 ### Add new vote to a poll
-POST http://localhost:{{BACKEND_PORT}}/api/polls/25/vote/{{GUEST_UUID}}
+POST http://localhost:{{BACKEND_PORT}}/api/polls/330/vote/{{GUEST_UUID}}
 Content-Type: application/json
 #Authorization: Bearer {{ACCESS_TOKEN}}
 
 {
-  "optionId": 49,
+  "optionId": 659,
   "vote":  "NO",
   "name": "Julek"
 }

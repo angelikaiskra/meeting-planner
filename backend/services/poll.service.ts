@@ -1,6 +1,6 @@
 import prisma from '../client';
 import { QueryResult } from '../types/utils.interface';
-import { MeetingPoll, MeetingPollOption, User, Vote, VoteType } from '@prisma/client';
+import { MeetingPoll, MeetingPollOption, User, Vote, VoteType, Prisma } from '@prisma/client';
 import { MeetingPollSettings, MeetingTime } from '../types/poll.interface';
 import ApiError from '../utils/ApiError';
 import httpStatus from 'http-status';
@@ -129,13 +129,12 @@ const getMeetingPollById = async (
  * Update meeting poll by id
  * @param {number} pollId
  * @param {string} ownerUuid
- * @param {Object} data
+ * @param {Prisma.MeetingPollUpdateInput} updateBody
  * @returns {Promise<MeetingPoll>}
  */
-// TODO: Add type for data
 const updateMeetingPoll = async (
   pollId: number,
-  data: Partial<MeetingPoll>,
+  updateBody: Prisma.MeetingPollUpdateInput,
   ownerUuid?: string
 ): Promise<MeetingPoll> => {
   const meetingPoll = await getMeetingPollById(pollId, ownerUuid);
@@ -147,7 +146,7 @@ const updateMeetingPoll = async (
     where: {
       id: pollId
     },
-    data
+    data: updateBody
   });
 };
 

@@ -96,7 +96,7 @@ const updateMeetingPoll = {
 const deleteMeetingPoll = {
   params: Joi.object().keys({
     pollId: Joi.number().integer().required(),
-    uuid: Joi.number().integer()
+    uuid: Joi.string()
   })
 };
 

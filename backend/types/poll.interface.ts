@@ -1,15 +1,18 @@
-import { MeetingPollOptionType } from '@prisma/client';
+import { MeetingPollOptionType, Prisma } from '@prisma/client';
 
-export interface MeetingPoll {
-  id: number,
-  userId?: number,
-  title: string,
-  timezone: string,
-  description: string,
-  options: MeetingTime[],
-  settings: MeetingPollSettings,
-}
+// Prisma helpers
+export type PollWithOptionsAndSettings = Prisma.MeetingPollGetPayload<{
+  include: {
+    options: {
+      include: {
+        votes: true
+      }
+    },
+    settings: true,
+  };
+}>;
 
+// Helper interfaces
 export interface MeetingTime {
   type: MeetingPollOptionType,
   startTime?: string,
@@ -25,10 +28,14 @@ export interface MeetingPollSettings {
 }
 
 // Requests
-export interface CreateMeetingPollRequest {
+interface BaseMeetingPollRequest {
   title: string;
   description: string;
   timezone: string;
   options: MeetingTime[];
   settings: MeetingPollSettings;
 }
+
+export interface CreateMeetingPollRequest extends BaseMeetingPollRequest {}
+
+export interface UpdateMeetingPollRequest extends Partial<BaseMeetingPollRequest> {}

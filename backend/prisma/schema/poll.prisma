@@ -19,7 +19,7 @@ model MeetingPollSettings {
   allowMaybeAnswer  Boolean?    @default(false)
   hideOthersAnswers Boolean?    @default(false)
   voteDeadline      DateTime?
-  poll              MeetingPoll @relation(fields: [pollId], references: [id])
+  poll              MeetingPoll @relation(fields: [pollId], references: [id], onDelete: Cascade)
   pollId            Int         @unique
 }
 

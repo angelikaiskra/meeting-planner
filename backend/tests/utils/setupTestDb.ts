@@ -9,11 +9,14 @@ const setupTestDB = () => {
   beforeEach(async () => {
     await prisma.token.deleteMany();
     await prisma.user.deleteMany();
+    await prisma.meetingPoll.deleteMany();
   });
 
   afterAll(async () => {
     await prisma.token.deleteMany();
     await prisma.user.deleteMany();
+    await prisma.meetingPoll.deleteMany();
+
     await prisma.$disconnect();
   });
 };
