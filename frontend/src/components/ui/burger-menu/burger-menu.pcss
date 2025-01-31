@@ -1,0 +1,50 @@
+.burgerMenu {
+    @apply w-5 h-4 relative cursor-pointer;
+
+    span {
+        @apply block absolute bg-accent h-0.5 w-full rounded-2xl left-0;
+
+        -webkit-transition: .25s ease-in-out;
+        -moz-transition: .25s ease-in-out;
+        -o-transition: .25s ease-in-out;
+        transition: .25s ease-in-out;
+
+        &:nth-child(1) {
+            @apply top-0;
+        }
+
+        &:nth-child(2),  &:nth-child(3) {
+            @apply top-1.5;
+        }
+
+        &:nth-child(4) {
+            @apply top-3;
+        }
+    }
+}
+
+.burgerMenu--open {
+    span {
+        &:nth-child(1) {
+            @apply w-0 left-1/2 top-1.5;
+        }
+
+        &:nth-child(2) {
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        &:nth-child(3) {
+            -webkit-transform: rotate(-45deg);
+            -moz-transform: rotate(-45deg);
+            -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+        }
+
+        &:nth-child(4) {
+            @apply w-0 left-1/2 top-1.5;
+        }
+    }
+}
