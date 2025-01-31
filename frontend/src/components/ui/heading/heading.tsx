@@ -1,5 +1,4 @@
 import React from 'react';
-import "./heading.pcss";
 
 interface HeadingProps {
     children: React.ReactNode;
@@ -8,7 +7,7 @@ interface HeadingProps {
 }
 
 const Heading: React.FC<HeadingProps> = ({ tag: Wrapper = "h1", className = "", children }) => (
-    <Wrapper className={`heading ${className}`}>
+    <Wrapper className={`heading text-font-black ${className}`}>
         {children}
     </Wrapper>
 );

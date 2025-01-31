@@ -7,7 +7,7 @@ interface ContentWrapperProps {
 
 const ContentWrapper: React.FC<ContentWrapperProps> = ({className = "", children}) => {
     return (
-        <div className={`w-full max-w-screen-xl mx-auto px-6 xl:px-0 ${className}`}>
+        <div className={`w-full max-w-(--breakpoint-xl) mx-auto px-6 xl:px-0 ${className}`}>
             {children}
         </div>
     );

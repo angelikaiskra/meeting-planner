@@ -37,7 +37,7 @@ const Header = () => {
                         </a>
                     </div>
                 </div>
-                <DividerLine color={"gray-200"} />
+                <DividerLine />
             </ContentWrapper>
         </div>
     );

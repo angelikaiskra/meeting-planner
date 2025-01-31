@@ -11,7 +11,7 @@ const CreatePoll = () => {
 
         <div className={'pt-32 pb-20'}>
           <ContentWrapper className={'text-center'}>
-            <Heading>Schedule a Meeting</Heading>
+            <Heading className={"h3"}>Create a meeting poll</Heading>
 
           </ContentWrapper>
         </div>

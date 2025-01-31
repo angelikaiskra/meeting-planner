@@ -1,3 +1,34 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+    --font-sans: "Inter", "sans-serif";
+
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+    --color-accent: #4A40F2;
+    --color-accent-dark: #3e34e3;
+    --color-font-black: #0D1216;
+    --color-font-gray: #555555;
+    --color-font-gray-light: #737373;
+    --color-gray-100: #FBFCFD;
+    --color-gray-200: #e8e8e8;
+    --color-green: #22c55e;
+}
+
+@layer typography {
+    h1.heading, .h1.heading {
+        @apply text-5xl font-extrabold;
+    }
+
+    h3.heading, .h3.heading {
+        @apply text-3xl font-bold;
+    }
+
+    p.heading {
+        @apply text-font-gray font-medium;
+    }
+
+    span.footer-title {
+        @apply uppercase text-[13px] font-semibold tracking-widest;
+    }
+}
