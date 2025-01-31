@@ -7,12 +7,12 @@ import Landing from '@/app/routes/landing.tsx';
 const createAppRouter = () => {
   return createBrowserRouter([
     {
-      path: "/create",
-      element: <CreatePoll />
-    },
-    {
       path: "/",
       element: <Landing />
+    },
+    {
+      path: "/create",
+      element: <CreatePoll />
     },
   ]);
 };

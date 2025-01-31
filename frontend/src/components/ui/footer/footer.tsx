@@ -1,5 +1,5 @@
 import ContentWrapper from "@/components/ui/content-wrapper/content-wrapper.tsx";
-import logoDark from "@/assets/logo-gray.svg";
+import logoDark from "@/assets/images/logo-gray.svg";
 import Heading from "@/components/ui/heading/heading.tsx";
 import githubIcon from "@/assets/icons/github.svg";
 import { githubRepoLink, linkedinLink } from '@/config/menu.ts';

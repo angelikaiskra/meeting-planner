@@ -1,6 +1,6 @@
 import { paths } from '@/config/paths.ts';
 
-interface MenuItem {
+export interface MenuItem {
   title: string;
   link: string;
 }

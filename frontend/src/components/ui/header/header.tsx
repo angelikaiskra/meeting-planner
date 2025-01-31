@@ -1,4 +1,4 @@
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/images/logo.svg";
 import linkedinIcon from "@/assets/icons/linkedin.svg";
 import githubIcon from "@/assets/icons/github.svg";
 
@@ -10,7 +10,7 @@ import { githubLink, linkedinLink } from '@/config/menu.ts';
 
 const Header = () => {
     return (
-        <div className={"fixed top-0 left-0 w-full h-80"}>
+        <div className={"fixed top-0 left-0 w-full h-20"}>
             <ContentWrapper>
                 <div className={"py-6 flex justify-between items-center"}>
                     <div className={"flex items-center"}>

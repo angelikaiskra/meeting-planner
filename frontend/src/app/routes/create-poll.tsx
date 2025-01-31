@@ -6,16 +6,18 @@ import Footer from '@/components/ui/footer/footer.tsx';
 const CreatePoll = () => {
   return (
     <>
-      <Header />
+      <div className={'bg-gray-100'}>
+        <Header />
 
-      <div className={"bg-gray-100 pt-12 pb-20"}>
-        <ContentWrapper className={"text-center"}>
-          <Heading>Schedule a Meeting</Heading>
+        <div className={'pt-32 pb-20'}>
+          <ContentWrapper className={'text-center'}>
+            <Heading>Schedule a Meeting</Heading>
 
-        </ContentWrapper>
+          </ContentWrapper>
+        </div>
       </div>
 
-      <Footer/>
+      <Footer />
     </>
   );
 };

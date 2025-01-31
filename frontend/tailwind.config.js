@@ -13,7 +13,6 @@ module.exports = {
       'accent-dark': '#3e34e3',
       'font': {
         'black': '#0D1216',
-        // 'dark-blue': '#374151',
         'gray': '#555555',
         'gray-light': '#737373',
       },
