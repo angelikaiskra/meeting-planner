@@ -8,9 +8,13 @@ import MenuLinks from "@/components/ui/menu-links/menu-links.tsx";
 import DividerLine from "@/components/ui/divider-line/divider-line.tsx";
 import { githubLink, linkedinLink } from '@/config/menu.ts';
 
-const Header = () => {
+interface HeaderProps {
+    className?: string;
+}
+
+const Header = ({className}: HeaderProps) => {
     return (
-        <div className={"fixed top-0 left-0 w-full h-20"}>
+        <div className={`fixed top-0 left-0 w-full h-20 ${className}`}>
             <ContentWrapper>
                 <div className={"py-6 flex justify-between items-center"}>
                     <div className={"flex items-center"}>

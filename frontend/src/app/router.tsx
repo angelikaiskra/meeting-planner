@@ -1,18 +1,18 @@
 import { createBrowserRouter } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
 
-import CreatePoll from '@/app/routes/create-poll.tsx';
-import Landing from '@/app/routes/landing.tsx';
+import LandingRoute from '@/app/routes/landing.tsx';
+import CreatePollRoute from '@/app/routes/create-poll.tsx';
 
 const createAppRouter = () => {
   return createBrowserRouter([
     {
       path: "/",
-      element: <Landing />
+      element: <LandingRoute />
     },
     {
       path: "/create",
-      element: <CreatePoll />
+      element: <CreatePollRoute />
     },
   ]);
 };
