@@ -1,7 +1,12 @@
 import React from 'react';
 
-const DividerLine: React.FC = () => (
-    <div className={`h-0.5 w-full bg-gray-200`} />
+interface DividerLineProps {
+  className?: string;
+  color?: string;
+}
+
+const DividerLine: React.FC = ({className = "", color = "bg-gray-200"}: DividerLineProps) => (
+    <div className={`h-0.5 w-full ${color} ${className}`} />
 );
 
 export default DividerLine;

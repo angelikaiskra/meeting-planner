@@ -3,18 +3,18 @@ import { FieldWrapperPassThroughProps } from '@/components/ui/form/field-wrapper
 
 export type SwitchProps = React.InputHTMLAttributes<HTMLInputElement> & FieldWrapperPassThroughProps;
 
-export const Switch = ({ checked, onChange, className, error, ...props }: SwitchProps) => {
+export const Switch = ({ checked, onChange, className = "", error, ...props }: SwitchProps) => {
   return (
-    <div>
+    <div className={"relative w-11 h-6"}>
       <input
-        type={"checkbox"}
-        role={"switch"}
+        type={'checkbox'}
+        role={'switch'}
         checked={checked}
         onChange={(e) => onChange && onChange(e)}
-        className={`peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-transparent p-0.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-green-600 data-[state=unchecked]:bg-gray-200 ${className}`}
+        className={`peer appearance-none shrink-0 w-11 h-6 rounded-full bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 transition checked:bg-green disabled:bg-gray-300 ${className}`}
         {...props}
       />
-      <span className={"pointer-events-none flex h-full w-4 items-center justify-center rounded-full bg-white shadow-lg ring-0 transition-transform duration-100 data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0"} />
+      <span className={'absolute w-4.5 h-4.5 rounded-full bg-white pointer-events-none peer-checked:translate-x-5 top-[3px] left-[2.5px] shadow-xs transition'} />
     </div>
   );
 };

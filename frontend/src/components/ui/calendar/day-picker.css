@@ -1,0 +1,6 @@
+/* Calendar */
+.rdp-root {
+    --rdp-nav_button-height: 1rem;
+    --rdp-day_button-width: 36px;
+    --rdp-day_button-height: 36px;
+}

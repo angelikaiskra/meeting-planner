@@ -9,7 +9,7 @@ export type FormProps = {
 
 export const Form = ({ id, onSubmit, children, className, ...props }: FormProps) => {
   return (
-    <form className={`space-y-6 ${className}`} id={id} onSubmit={onSubmit} {...props}>
+    <form className={`${className}`} id={id} onSubmit={onSubmit} {...props}>
       {children}
     </form>
   );

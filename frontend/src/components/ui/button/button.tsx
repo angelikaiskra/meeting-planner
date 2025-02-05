@@ -7,8 +7,8 @@ interface ButtonProps {
     className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ onClick, disabled = false, className, children }) => (
-    <button className={`px-5 py-2.5 min-w-36 bg-accent text-white font-bold shadow-btn rounded-md transition-all hover:bg-accent-dark active:shadow-btn-clicked active:translate-y-1 ${className}`}
+const Button = ({ onClick, disabled = false, className = "", children }: ButtonProps) => (
+    <button className={`px-5 py-2.5 w-full md:w-fit md:min-w-36 bg-accent text-sm text-white font-semibold shadow-btn rounded-md transition-all hover:bg-accent-dark active:shadow-btn-clicked active:translate-y-1 ${className}`}
             onClick={onClick}
             disabled={disabled}>
         {children}

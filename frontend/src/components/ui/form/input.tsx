@@ -8,7 +8,7 @@ export const Input = ({ className, type = "text", label, optional, error, ...pro
     <FieldWrapper label={label} optional={optional} error={error}>
       <input
         type={type}
-        className={'flex h-10 w-full rounded-md border border-input bg-transparent px-4 py-1 text-sm transition-colors placeholder:text-gray-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50'}
+        className={'flex h-10 w-full rounded-md border border-input bg-transparent px-4 py-1 text-sm transition-colors placeholder:text-gray-300 disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent'}
         {...props}
       />
     </FieldWrapper>
