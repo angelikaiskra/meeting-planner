@@ -17,12 +17,12 @@ const DayPicker = ({className = {}, selected, setSelected, ...props}: DayPickerP
     months: `${defaultClassNames.months} block text-sm`,
     month_caption: `flex justify-center h-12 font-regular text-base`,
     nav: `absolute top-0 left-0 w-full flex justify-between items-center h-12`,
-    button_previous: `${defaultClassNames.button_previous} ${outlineClasses} left-8`,
-    button_next: `${defaultClassNames.button_previous} ${outlineClasses} right-8`,
+    button_previous: `${defaultClassNames.button_previous} ${outlineClasses} left-8 !h-9 rounded-full hover:!bg-gray-100`,
+    button_next: `${defaultClassNames.button_previous} ${outlineClasses} right-8 !h-9 rounded-full hover:!bg-gray-100`,
     chevron: `${defaultClassNames.chevron} fill-accent`,
     selected: `${defaultClassNames.selected} !font-normal [&>button]:!bg-accent [&>button]:!border-0 [&>button]:!text-white [&>button]:!text-sm`,
     today: `${defaultClassNames.today} font-bold`,
-    day: `${defaultClassNames.day} [&>button]:focus-visible:outline-none [&>button]:focus-visible:ring-2 [&>button]:focus:ring-ring`,
+    day: `${defaultClassNames.day} hover:[&>button]:!bg-gray-100 [.rdp-selected]:hover:[&>button]:!bg-accent [&>button]:focus-visible:outline-none [&>button]:focus-visible:ring-2 [&>button]:focus:ring-ring`,
     ...className
   };
 

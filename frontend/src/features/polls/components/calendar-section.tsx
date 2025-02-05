@@ -25,7 +25,7 @@ const CalendarSection = () => {
       }
     })
 
-    // **Sorting Logic**: Convert to array, sort by startTime, then convert back to object
+    // Sorting Logic: Convert to array, sort by startTime, then convert back to object
     const sortedOptions = Object.entries(newSelectedOptions)
       .sort(([dateA], [dateB]) => new Date(dateA).getTime() - new Date(dateB).getTime())
       .reduce((acc, [key, value]) => {
