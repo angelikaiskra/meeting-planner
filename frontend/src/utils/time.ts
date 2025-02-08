@@ -1,23 +1,24 @@
-export const dateToLocale = (date = new Date()) => {
-  const year = date.toLocaleString('default', { year: 'numeric' });
-  const month = date.toLocaleString('default', {
-    month: '2-digit',
-  });
-  const day = date.toLocaleString('default', { day: '2-digit' });
+import { SelectOption } from '@/types/forms.ts';
+import { TimeValue } from '@/types/time.ts';
+import moment from 'moment';
 
-  return [year, month, day].join('-');
+export const dateToLocale = (date = new Date()) => {
+  return moment(date).format("YYYY-MM-DD");
 }
 
-export const generateTimeValues = (incrementValue: number = 30): { label: string; value: string; }[] => {
-  const options: { label: string; value: string; }[] = [];
+export const generateTimeValues = (incrementValue: number = 30): SelectOption<TimeValue>[] => {
+  const options: SelectOption<TimeValue>[] = [];
   for (let hours = 0; hours < 24; hours++) {
     for (let minutes = 0; minutes < 60; minutes += incrementValue) {
-      const formattedHours = String(hours).padStart(2, '0');
-      const formattedMinutes = String(minutes).padStart(2, '0');
-      const time = `${formattedHours}:${formattedMinutes}`;
-      options.push({ label: time, value: time });
+      const time = formatHoursAndMinutes(hours, minutes);
+      options.push({ label: time, value: {hours: hours, minutes: minutes}, });
     }
   }
-  options.push({ label: "24:00", value: "24:00" }); // Add final 24:00 option
   return options;
+}
+
+export const formatHoursAndMinutes = (hours: number, minutes: number) => {
+  const formattedHours = String(hours).padStart(2, '0');
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  return `${formattedHours}:${formattedMinutes}`;
 }

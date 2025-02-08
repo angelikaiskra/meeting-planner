@@ -8,7 +8,7 @@ interface DayPickerProps {
   onSelect?: OnSelectHandler<Date[] | undefined>;
 }
 
-const DayPicker = ({className = {}, selected, setSelected, ...props}: DayPickerProps) => {
+const DayPicker = ({className = {}, selected, onSelect, ...props}: DayPickerProps) => {
   const defaultClassNames = getDefaultClassNames();
 
   const outlineClasses = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
@@ -31,7 +31,7 @@ const DayPicker = ({className = {}, selected, setSelected, ...props}: DayPickerP
         mode={"multiple"}
         showOutsideDays={true}
         selected={selected}
-        onSelect={setSelected}
+        onSelect={onSelect}
         classNames={calendarClasses}
         {...props}
       />

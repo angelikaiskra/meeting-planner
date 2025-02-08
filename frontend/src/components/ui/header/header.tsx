@@ -14,7 +14,7 @@ interface HeaderProps {
 
 const Header = ({className}: HeaderProps) => {
     return (
-        <div className={`fixed top-0 left-0 w-full h-20 ${className}`}>
+        <div className={`fixed top-0 left-0 w-full h-20 z-20 ${className}`}>
             <ContentWrapper>
                 <div className={"py-6 flex justify-between items-center"}>
                     <div className={"flex items-center"}>

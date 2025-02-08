@@ -6,6 +6,7 @@ import SettingsSection from '@/features/polls/components/settings-section.tsx';
 import Button from '@/components/ui/button/button.tsx';
 import DividerLine from '@/components/ui/divider-line/divider-line.tsx';
 import CalendarSection from '@/features/polls/components/calendar-section.tsx';
+import SelectedOptionsProvider from '@/features/polls/context/selected-options-context.tsx';
 
 export const CreatePollForm = () => {
   const [title, setTitle] = useState('');
@@ -26,15 +27,17 @@ export const CreatePollForm = () => {
                onChange={(e) => setTitle(e.target.value)} />
 
         <Typography variant={'lead'} className={'pt-3'}>Calendar</Typography>
-        <CalendarSection />
+        <SelectedOptionsProvider>
+          <CalendarSection />
+        </SelectedOptionsProvider>
 
         <Typography variant={'lead'} className={'pt-3'}>Settings</Typography>
         <SettingsSection />
       </div>
 
-      <DividerLine className={"my-6"} color={"bg-white"} />
+      <DividerLine className={'my-6'} color={'bg-white'} />
 
-      <Button className={"block mx-auto"} onClick={() => console.log('Create a poll')}>Create a poll</Button>
+      <Button className={'block mx-auto'} onClick={() => console.log('Create a poll')}>Create a poll</Button>
     </Form>
   );
 };
