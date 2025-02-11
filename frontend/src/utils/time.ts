@@ -1,6 +1,6 @@
 import { SelectOption } from '@/types/forms.ts';
-import { TimeValue } from '@/types/time.ts';
 import moment from 'moment';
+import { TimeValue } from '@/types/time.ts';
 
 export const dateToLocale = (date = new Date()) => {
   return moment(date).format("YYYY-MM-DD");

@@ -1,24 +1,37 @@
 import { Input } from '@/components/ui/form/input.tsx';
 import { Form } from '@/components/ui/form/form.tsx';
 import { joiResolver } from "@hookform/resolvers/joi";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from 'react-hook-form';
 import Typography from '@/components/ui/typography/typography.tsx';
 import SettingsSection from '@/features/polls/components/settings-section.tsx';
 import Button from '@/components/ui/button/button.tsx';
 import DividerLine from '@/components/ui/divider-line/divider-line.tsx';
 import CalendarSection from '@/features/polls/components/calendar-section.tsx';
-import { createMeetingPollSchema, CreateMeetingPollSchemaType } from '@/features/polls/types/create-poll-schema.ts';
+import { CreateMeetingPollFields, createMeetingPollSchema } from '@/features/polls/schema/create-poll.ts';
+import { TimeOption } from '@/types/time.ts';
 
 export const CreatePollForm = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
-  } = useForm<CreateMeetingPollSchemaType>({
+  } = useForm<CreateMeetingPollFields>({
     resolver: joiResolver(createMeetingPollSchema),
+    defaultValues: {
+      title: "",
+      description: "",
+      options: [],
+      settings: {
+        allowOnlyOneVote: false,
+        allowMaybeAnswer: false,
+        hideOthersAnswers: false,
+        voteDeadline: "",
+      }
+    },
   });
 
-  const onSubmitForm = (data: CreateMeetingPollSchemaType) => {
+  const onSubmitForm = (data: any) => {
     console.log('onSubmit CreatePoll', data);
   };
 
@@ -39,7 +52,17 @@ export const CreatePollForm = () => {
                errorMessage={errors.description?.message} />
 
         <Typography variant={'lead'} className={'pt-3'}>Calendar</Typography>
-        <CalendarSection />
+        <Controller
+          control={control}
+          name="options"
+          render={({ field: { value, onChange, ...props } }) => (
+            <CalendarSection
+              options={value}
+              setOptions={(value: TimeOption[]) => onChange(value)}
+              {...props}
+            />
+          )}
+        />
 
         <Typography variant={'lead'} className={'pt-3'}>Settings</Typography>
         <SettingsSection />

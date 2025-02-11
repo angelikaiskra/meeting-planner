@@ -7,8 +7,8 @@ export const createMeetingPollSchema = Joi.object().keys({
   options: Joi.array()
     .items(
       Joi.object({
-        startTime: Joi.string().isoDate().required(),
-        endTime: Joi.string().isoDate().required(),
+        startTime: Joi.date().iso().required(),
+        endTime: Joi.date().iso().greater(Joi.ref('startTime')).required()
       })
     )
     .min(1)
@@ -25,5 +25,3 @@ export const createMeetingPollSchema = Joi.object().keys({
       'options.required': 'Please add at least one time option'
     })
 });
-
-export type CreateMeetingPollSchemaType = Joi.infer<typeof createMeetingPollSchema>;

@@ -1,6 +1,6 @@
 interface CalendarDayProps {
   monthName: string;
-  dayNumber: number;
+  dayNumber: string;
   className?: string;
 }
 
