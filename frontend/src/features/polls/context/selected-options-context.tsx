@@ -5,7 +5,7 @@ import { GroupedTimeOptions, TimeOption, TimeValue } from '@/types/time.ts';
 export interface SelectedOptionsContextType {
   selectedOptions: GroupedTimeOptions;
   addNewDay: (date: Date) => void;
-  removeDay: (date: Date) => void;
+  removeDay: (dateString: string) => void;
   sort: () => void;
   updateTime: (dateString: string, index: number, propertyName: keyof TimeOption, newTime: TimeValue) => void;
   addNewTimeOption: (dateString: string) => void;
@@ -33,9 +33,8 @@ const SelectedOptionsProvider = ({ children }: PropsWithChildren) => {
     setSelectedOptions(sortedOptions);
   };
 
-  const removeDay = (date: Date) => {
+  const removeDay = (dateString: string) => {
     const newSelectedOptions = { ...selectedOptions };
-    const dateString = dateToLocale(date); // convert date to format YYYY-MM-DD
 
     if (newSelectedOptions[dateString]) {
       delete newSelectedOptions[dateString];
@@ -82,6 +81,10 @@ const SelectedOptionsProvider = ({ children }: PropsWithChildren) => {
     let newSelectedOptions = { ...selectedOptions };
     newSelectedOptions[dateString].splice(index, 1);
     setSelectedOptions(newSelectedOptions);
+
+    if (newSelectedOptions[dateString].length === 0) {
+      removeDay(dateString);
+    }
   }
 
   // Sorting Logic: Convert to array, sort by startTime, then convert back to object

@@ -4,6 +4,7 @@ import SelectedDate from '@/features/polls/components/selected-date.tsx';
 import { isObjectEmpty } from '@/utils/objects.ts';
 import { SelectedOptionsContext, SelectedOptionsContextType } from '@/features/polls/context/selected-options-context.tsx';
 import DividerLine from '@/components/ui/divider-line/divider-line.tsx';
+import { Calendar } from '@phosphor-icons/react';
 
 const CalendarSection = () => {
   const { selectedOptions, addNewDay } = useContext(SelectedOptionsContext) as SelectedOptionsContextType;
@@ -27,9 +28,18 @@ const CalendarSection = () => {
     );
   };
 
+  const renderNoDaysPlaceholder = () => {
+    return (
+      <div className={"flex flex-col gap-4 justify-center items-center text-gray-300 text-center m-auto md:py-6 px-10 max-w-77"}>
+        <Calendar size={48} />
+        <span>Click on a date in the calendar to get started</span>
+      </div>
+    )
+  }
+
   const renderSelectedDates = () => {
     if (!selectedOptions || isObjectEmpty(selectedOptions))
-      return null;
+      return renderNoDaysPlaceholder();
 
     return (
       Object.keys(selectedOptions).map((dateString, index) => (
@@ -41,7 +51,7 @@ const CalendarSection = () => {
   };
 
   return (
-    <div className={'flex max-md:flex-wrap'}>
+    <div className={'flex max-md:flex-wrap max-md:pb-8 max-md:border-b-2 max-md:border-gray-200'}>
       {renderDayPicker()}
 
       <div

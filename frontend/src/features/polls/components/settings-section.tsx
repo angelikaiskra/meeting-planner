@@ -51,7 +51,6 @@ const SettingsItem = ({ item }: { item: SettingsItem }) => {
       <Icon size={24} />
       <span className={'flex-1 text-sm'}>{item.text}</span>
       <Switch />
-      {/*<InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />*/}
     </label>
   );
 };
