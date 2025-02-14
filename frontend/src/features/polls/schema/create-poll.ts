@@ -1,8 +1,8 @@
 import Joi from 'joi';
 
 export const createMeetingPollSchema = Joi.object().keys({
-  title: Joi.string().required().max(254),
-  description: Joi.string().max(1000),
+  title: Joi.string().required().max(254).messages({ 'string.empty': 'Title is required.', 'string.max': 'Title is too long.' }),
+  description: Joi.string().max(1000).messages({ 'string.empty': 'Description is required.', 'string.max': 'Description is too long.' }),
   // timezone: Joi.string().max(200),
   options: Joi.array()
     .items(
@@ -12,16 +12,12 @@ export const createMeetingPollSchema = Joi.object().keys({
       })
     )
     .min(1)
-    .required(),
+    .required()
+    .messages({ 'array.min': 'Please select at least one option.' }),
   settings: Joi.object({
     allowOnlyOneVote: Joi.boolean(),
     allowMaybeAnswer: Joi.boolean(),
     hideOthersAnswers: Joi.boolean(),
-    // voteDeadline: Joi.string().isoDate()
+    voteDeadline: Joi.string().isoDate()
   })
-    .messages({
-      'any.required': `"a" is required.`,
-      'string.empty': `"a" is required.`,
-      'options.required': 'Please add at least one time option'
-    })
 });

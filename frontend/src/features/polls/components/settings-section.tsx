@@ -1,29 +1,29 @@
-import { WaveSine, NumberCircleOne, Question, CalendarX, Icon } from '@phosphor-icons/react';
-import { Switch } from '@/components/ui/form/switch.tsx';
+import { WaveSine, NumberCircleOne, Question, CalendarX } from '@phosphor-icons/react';
+import { PollSettings } from '../types/create-poll';
+import SettingsItem, { SettingsItemProps } from './settings-item';
+import React from 'react';
 
-export interface SettingsItem {
-  icon: Icon;
-  text: string;
-  defaultValue: boolean;
-}
-
-const SETTINGS_ITEMS: SettingsItem[] = [
+const SETTINGS_ITEMS: SettingsItemProps[] = [
   {
+    property: 'allowOnlyOneVote',
     icon: WaveSine,
     text: 'Allow "maybe" answer',
     defaultValue: false
   },
   {
+    property: 'allowMaybeAnswer',
     icon: NumberCircleOne,
     text: 'Limit selection to one option only',
     defaultValue: false
   },
   {
+    property: 'hideOthersAnswers',
     icon: Question,
     text: 'Hide other participants answers',
     defaultValue: false
   },
   {
+    property: 'voteDeadline',
     icon: CalendarX,
     text: 'Vote deadline',
     defaultValue: false
@@ -31,28 +31,24 @@ const SETTINGS_ITEMS: SettingsItem[] = [
 ];
 
 interface SettingsSectionProps {
+  selectedSettings: PollSettings;
+  setSelectedSettings: (value: PollSettings) => void;
   className?: string;
 }
 
-const SettingsSection = ({ className = '' }: SettingsSectionProps) => {
+const SettingsSection = React.forwardRef<HTMLDivElement, SettingsSectionProps>(({ className = '', selectedSettings, setSelectedSettings }: SettingsSectionProps, ref) => {
+  const onSettingsItemChange = (propertyName: string, newVal: boolean) => {
+    const newSettings = { ...selectedSettings, [propertyName]: newVal };
+    setSelectedSettings(newSettings);
+  }
+
   return (
-    <div className={`flex flex-col gap-y-3 ${className}`}>
+    <div className={`flex flex-col gap-y-3 ${className}`} ref={ref}>
       {SETTINGS_ITEMS.map((item, index) => {
-        return <SettingsItem item={item} key={index} />;
+        return <SettingsItem item={item} key={index} onChange={onSettingsItemChange} />;
       })}
     </div>
   );
-};
-
-const SettingsItem = ({ item }: { item: SettingsItem }) => {
-  const Icon = item.icon;
-  return (
-    <label className={'cursor-pointer flex justify-between items-center gap-x-4 gap-y-2.5 border border-input rounded-md py-2 px-3 hover:bg-gray-100 active:bg-gray-100 select-none'}>
-      <Icon size={24} />
-      <span className={'flex-1 text-sm'}>{item.text}</span>
-      <Switch />
-    </label>
-  );
-};
+});
 
 export default SettingsSection;
