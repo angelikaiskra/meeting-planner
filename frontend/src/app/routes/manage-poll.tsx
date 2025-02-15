@@ -1,7 +1,7 @@
 import Header from '@/components/ui/header/header.tsx';
 import ContentWrapper from '@/components/ui/content-wrapper/content-wrapper.tsx';
-import Typography from '@/components/ui/typography/typography.tsx';
 import Footer from '@/components/ui/footer/footer.tsx';
+import Alert from '@/components/ui/alert/alert';
 
 const ManagePollRoute = () => {
   return (
@@ -10,8 +10,10 @@ const ManagePollRoute = () => {
         <Header className={"bg-gray-100"} />
 
         <div className={"pt-30 pb-20"}>
-          <ContentWrapper>
-            <Typography as={"h1"} variant={"h2"}>Manage poll</Typography>
+          <ContentWrapper className="max-w-2xl">
+            <Alert variant="warning">
+              Your administrator rights will be lost if you clear your cookies.
+            </Alert>
 
           </ContentWrapper>
         </div>

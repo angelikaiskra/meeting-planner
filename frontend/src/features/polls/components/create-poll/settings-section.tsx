@@ -1,5 +1,5 @@
 import { WaveSine, NumberCircleOne, Question, CalendarX } from '@phosphor-icons/react';
-import { PollSettings } from '../types/create-poll';
+import { PollSettings } from '../../types/create-poll';
 import SettingsItem, { SettingsItemProps } from './settings-item';
 import React from 'react';
 

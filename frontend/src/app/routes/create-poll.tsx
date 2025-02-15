@@ -2,7 +2,7 @@ import Header from '@/components/ui/header/header.tsx';
 import ContentWrapper from '@/components/ui/content-wrapper/content-wrapper.tsx';
 import Typography from '@/components/ui/typography/typography.tsx';
 import Footer from '@/components/ui/footer/footer.tsx';
-import { CreatePollForm } from '@/features/polls/components/create-poll-form.tsx';
+import { CreatePollForm } from '@/features/polls/components/create-poll/create-poll-form';
 
 const CreatePollRoute = () => {
   return (
