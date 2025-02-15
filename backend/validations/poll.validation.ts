@@ -4,7 +4,7 @@ const createMeetingPoll = {
   body: Joi.object().keys({
     title: Joi.string().required().max(254),
     description: Joi.string().max(1000),
-    timezone: Joi.string().max(200),
+    timezone: Joi.string().max(200).required(),
     options: Joi.array()
       .items(
         Joi.object({
@@ -32,7 +32,7 @@ const createMeetingPoll = {
       allowOnlyOneVote: Joi.boolean(),
       allowMaybeAnswer: Joi.boolean(),
       hideOthersAnswers: Joi.boolean(),
-      voteDeadline: Joi.string().isoDate()
+      voteDeadline: Joi.string().isoDate().allow(null, '')
     })
   })
 };

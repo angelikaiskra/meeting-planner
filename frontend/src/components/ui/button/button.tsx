@@ -1,16 +1,30 @@
-import React, {MouseEventHandler} from 'react';
+import classNames from 'classnames';
+import React, { MouseEventHandler } from 'react';
 
-interface ButtonProps {
+const variants = {
+    "gray-outline": 'bg-transparent border-2 border-gray-200 text-gray-300 hover:bg-gray-200',
+    primary: 'bg-accent text-white hover:bg-accent-dark',
+};
+
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     children: React.ReactNode;
     onClick?: MouseEventHandler<HTMLButtonElement>;
+    withAnim?: boolean;
     disabled?: boolean;
     className?: string;
-}
+    variant?: keyof typeof variants;
+};
 
-const Button = ({ onClick, disabled = false, className = "", children }: ButtonProps) => (
-    <button className={`px-5 py-2.5 w-full md:w-fit md:min-w-36 bg-accent text-sm text-white font-semibold shadow-btn rounded-md transition-all hover:bg-accent-dark active:shadow-btn-clicked active:translate-y-1 ${className}`}
-            onClick={onClick}
-            disabled={disabled}>
+const Button = ({ onClick, variant = "primary", withAnim = true, disabled = false, className = "", children, ...props }: ButtonProps) => (
+    <button className={classNames(
+        "px-5 py-2.5 w-full md:w-fit md:min-w-36 text-sm font-semibold rounded-md transition-all cursor-pointer disabled:cursor-default disabled:bg-gray-300",
+        withAnim && "shadow-btn active:translate-y-1 active:shadow-btn-clicked",
+        variants[variant],
+        className
+    )}
+        onClick={onClick}
+        disabled={disabled}
+        {...props}>
         {children}
     </button>
 );

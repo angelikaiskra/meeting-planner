@@ -24,7 +24,7 @@ export interface MeetingPollSettings {
   allowOnlyOneVote?: boolean,
   allowMaybeAnswer?: boolean,
   hideOthersAnswers?: boolean,
-  voteDeadline?: string,
+  voteDeadline?: string | null,
 }
 
 // Requests
@@ -36,6 +36,6 @@ interface BaseMeetingPollRequest {
   settings: MeetingPollSettings;
 }
 
-export interface CreateMeetingPollRequest extends BaseMeetingPollRequest {}
+export interface CreateMeetingPollRequest extends BaseMeetingPollRequest { }
 
-export interface UpdateMeetingPollRequest extends Partial<BaseMeetingPollRequest> {}
+export interface UpdateMeetingPollRequest extends Partial<BaseMeetingPollRequest> { }

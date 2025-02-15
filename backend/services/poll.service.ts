@@ -25,10 +25,14 @@ const createMeetingPoll = async (
 ): Promise<MeetingPoll> => {
   const userInfo = user
     ? {
-        userId: user.id,
-        ownerUuid: user.uuid
-      }
+      userId: user.id,
+      ownerUuid: user.uuid
+    }
     : null;
+
+  if (settings.voteDeadline === "") {
+    settings.voteDeadline = null;
+  }
 
   return prisma.meetingPoll.create({
     data: {
@@ -195,8 +199,8 @@ const addUserVote = async (
         create: {
           vote,
           ...userInfo.isGuest ?
-            {guestUuid: userInfo.guestUuid, guestName: userInfo.guestName} :
-            {userId: userInfo.userId}
+            { guestUuid: userInfo.guestUuid, guestName: userInfo.guestName } :
+            { userId: userInfo.userId }
         }
       }
     },

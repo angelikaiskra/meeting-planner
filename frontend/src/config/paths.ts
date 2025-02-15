@@ -10,6 +10,11 @@ export const paths = {
     menuTitle: 'Create poll'
   },
 
+  managePoll: {
+    path: '/poll/:pollId',
+    getHref: (pollId: string) => `/poll/${pollId}`,
+  },
+
   register: {
     path: '/auth/register',
     getHref: (redirectTo?: string | null | undefined) =>

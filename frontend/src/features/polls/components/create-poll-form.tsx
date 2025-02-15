@@ -7,18 +7,23 @@ import SettingsSection from '@/features/polls/components/settings-section.tsx';
 import Button from '@/components/ui/button/button.tsx';
 import DividerLine from '@/components/ui/divider-line/divider-line.tsx';
 import CalendarSection from '@/features/polls/components/calendar-section.tsx';
-import { createMeetingPollSchema } from '@/features/polls/schema/create-poll.ts';
+import { createMeetingPollInputSchema, useCreateMeetingPoll } from '@/features/polls/api/create-poll.ts';
 import { TimeOption } from '@/types/time.ts';
-import { CreateMeetingPollFields, PollSettings } from '../types/create-poll';
+import { CreateMeetingPollFields, CreateMeetingPollResponse } from '../types/create-poll';
+import { PollSettings } from '@/types/polls';
+import { useNavigate } from 'react-router';
+import { paths } from '@/config/paths';
 
 export const CreatePollForm = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
   } = useForm<CreateMeetingPollFields>({
-    resolver: joiResolver(createMeetingPollSchema),
+    resolver: joiResolver(createMeetingPollInputSchema),
     defaultValues: {
       title: "",
       description: "",
@@ -32,22 +37,25 @@ export const CreatePollForm = () => {
     },
   });
 
-  console.log("errors", errors);
+  const createMeetingPollMutation = useCreateMeetingPoll({
+    mutationConfig: {
+      onSuccess: (data: unknown) => {
+        const res = data as CreateMeetingPollResponse;
+        console.log('createMeetingPoll res', res);
+        navigate(paths.managePoll.getHref(res.poll.id));
+      }
+    }
+  });
 
-  const onSubmitForm = (data: CreateMeetingPollFields) => {
-    console.log('onSubmit CreatePoll', data);
+  const onSubmitForm = (values: CreateMeetingPollFields) => {
+    console.log('onSubmit CreatePoll', values);
+
+    createMeetingPollMutation.mutate({ data: values });
   };
 
-  const renderCalendarError = () => {
-    return (
-      <div className={'text-red-500 text-sm'}>
-        {errors.options?.message}
-      </div>
-    );
-  }
-
   return (
-    <Form id={'create-poll'} className={'mt-10 max-w-[700px] mx-auto'} onSubmit={handleSubmit(onSubmitForm)}>
+    <Form id={'create-poll'} className={'mt-10 max-w-[700px] mx-auto'}
+      onSubmit={handleSubmit(onSubmitForm)}>
 
       <div className={'space-y-6 px-5 py-4 md:p-8 bg-white border border-gray-200 rounded-lg shadow-sm'}>
         <Input {...register("title")}
@@ -71,11 +79,11 @@ export const CreatePollForm = () => {
             <CalendarSection
               options={value}
               setOptions={(value: TimeOption[]) => onChange(value)}
+              errorMessage={errors.options?.message}
               {...props}
             />
           )}
         />
-        {errors.options && renderCalendarError()}
 
         <Typography variant={'lead'} className={'pt-3'}>Settings</Typography>
         <Controller
@@ -93,8 +101,7 @@ export const CreatePollForm = () => {
 
       <DividerLine className={'my-6'} color={'bg-white'} />
 
-      <Button className={'block mx-auto'}
-        disabled={isSubmitting}>
+      <Button className={'block mx-auto'} disabled={isSubmitting} type={'submit'}>
         Create a poll
       </Button>
     </Form>

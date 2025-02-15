@@ -3,6 +3,7 @@ import { RouterProvider } from 'react-router/dom';
 
 import LandingRoute from '@/app/routes/landing.tsx';
 import CreatePollRoute from '@/app/routes/create-poll.tsx';
+import ManagePollRoute from './routes/manage-poll';
 
 const createAppRouter = () => {
   return createBrowserRouter([
@@ -13,6 +14,10 @@ const createAppRouter = () => {
     {
       path: "/create",
       element: <CreatePollRoute />
+    },
+    {
+      path: "/poll/:pollId",
+      element: <ManagePollRoute />
     },
   ]);
 };

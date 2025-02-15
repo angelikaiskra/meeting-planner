@@ -9,9 +9,10 @@ import moment from 'moment';
 interface CalendarSectionProps {
   options: TimeOption[];
   setOptions: (value: TimeOption[]) => void;
+  errorMessage?: string;
 }
 
-const CalendarSection = React.forwardRef<HTMLDivElement, CalendarSectionProps>(({ options, setOptions }, ref) => {
+const CalendarSection = React.forwardRef<HTMLDivElement, CalendarSectionProps>(({ options, setOptions, errorMessage }, ref) => {
 
   const onSelectDay = (dates: Date[] | undefined) => {
     if (!dates) return;
@@ -96,30 +97,33 @@ const CalendarSection = React.forwardRef<HTMLDivElement, CalendarSectionProps>((
   const groupedOptions = useMemo(() => groupByDate(options), [options]);
 
   return (
-    <div className={'flex max-md:flex-wrap max-md:pb-8 max-md:border-b-2 max-md:border-gray-200'} ref={ref}>
-      <DayPicker selected={options.map((opt) => opt.startTime)} onSelect={onSelectDay} />
+    <>
+      <div className={'flex max-md:flex-wrap max-md:pb-8 max-md:border-b-2 max-md:border-gray-200'} ref={ref}>
+        <DayPicker selected={options.map((opt) => opt.startTime)} onSelect={onSelectDay} />
 
-      <div className="w-full flex flex-col gap-y-6 max-md:mt-6 md:border-l-2 md:border-gray-200 md:ml-4 md:pl-6 md:flex-1">
-        {options.length === 0 ? (
-          <NoDaysPlaceholder />
-        ) : (
-          Object.keys(groupedOptions).map((dateKey, index) => (
-            <React.Fragment key={dateKey}>
-              <SelectedDate
-                dateKey={dateKey}
-                dateOptions={groupedOptions[dateKey]}
-                onAddTimeClick={onAddTimeClick}
-                onRemoveTimeClick={onRemoveTimeClick}
-                updateOption={updateOption}
-                options={options}
-              />
-              {index !== Object.keys(groupedOptions).length - 1 && <DividerLine color="bg-gray-100" />}
-            </React.Fragment>
-          ))
-        )}
+        <div className="w-full flex flex-col gap-y-6 max-md:mt-6 md:border-l-2 md:border-gray-200 md:ml-4 md:pl-6 md:flex-1">
+          {options.length === 0 ? (
+            <NoDaysPlaceholder />
+          ) : (
+            Object.keys(groupedOptions).map((dateKey, index) => (
+              <React.Fragment key={dateKey}>
+                <SelectedDate
+                  dateKey={dateKey}
+                  dateOptions={groupedOptions[dateKey]}
+                  onAddTimeClick={onAddTimeClick}
+                  onRemoveTimeClick={onRemoveTimeClick}
+                  updateOption={updateOption}
+                  options={options}
+                />
+                {index !== Object.keys(groupedOptions).length - 1 && <DividerLine color="bg-gray-100" />}
+              </React.Fragment>
+            ))
+          )}
+        </div>
       </div>
 
-    </div>
+      {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
+    </>
   );
 });
 
