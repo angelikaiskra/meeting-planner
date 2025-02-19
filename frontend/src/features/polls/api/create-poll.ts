@@ -1,17 +1,17 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import Joi from 'joi';
 import { CreateMeetingPollFields, CreateMeetingPollResponse } from '../types/create-poll';
 import { api } from '@/lib/api-client';
 
 export const createMeetingPollInputSchema = Joi.object().keys({
     title: Joi.string().required().max(254).messages({ 'string.empty': 'Title is required.', 'string.max': 'Title is too long.' }),
-    description: Joi.string().max(1000).messages({ 'string.empty': 'Description is required.', 'string.max': 'Description is too long.' }),
+    description: Joi.string().optional().max(1000).messages({ 'string.empty': 'Description is required.', 'string.max': 'Description is too long.' }),
     timezone: Joi.string().max(200),
     options: Joi.array()
         .items(
             Joi.object({
                 startTime: Joi.date().iso().required(),
-                endTime: Joi.date().iso().greater(Joi.ref('startTime')).required()
+                endTime: Joi.date().iso().greater(Joi.ref('startTime')).required().messages({ 'date.greater': 'Invalid end time selected.' }),
             })
         )
         .min(1)
@@ -51,14 +51,11 @@ export const useCreateMeetingPoll = ({ mutationConfig }: CreateMeetingPollMutati
 
     return useMutation({
         onSuccess: (...args) => {
-            // invalidate get query
-            // queryClient.invalidateQueries({
-            //   queryKey: getDiscussionsQueryOptions().queryKey,
-            // });
-
             // if guest then store guestUuid in local storage
-            if (args[0].isGuest && args[0].guestUuid) {
-                localStorage.setItem('guestUuid', args[0].guestUuid);
+            if (args[0].isGuest && args[0].guestUuid && args[0].poll.id) {
+                localStorage.setItem(`${args[0].poll.id}:guestUuid`, args[0].guestUuid);
+            } else {
+                console.error('Could not store guestUuid in local storage');
             }
 
             onSuccess?.(...args);

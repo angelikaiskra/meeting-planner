@@ -41,7 +41,6 @@ export const CreatePollForm = () => {
     mutationConfig: {
       onSuccess: (data: unknown) => {
         const res = data as CreateMeetingPollResponse;
-        console.log('createMeetingPoll res', res);
         navigate(paths.managePoll.getHref(res.poll.id));
       }
     }
@@ -79,7 +78,7 @@ export const CreatePollForm = () => {
             <CalendarSection
               options={value}
               setOptions={(value: TimeOption[]) => onChange(value)}
-              errorMessage={errors.options?.message}
+              error={errors.options}
               {...props}
             />
           )}

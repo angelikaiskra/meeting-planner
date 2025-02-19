@@ -8,6 +8,7 @@ services:
     image: node-app
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
+      - "5555:5555"
     depends_on:
       - postgres
     volumes:

@@ -11,10 +11,11 @@ interface SelectedDateProps {
     onAddTimeClick: (e: React.MouseEvent<HTMLButtonElement>, date: Date, lastDateOption: TimeOption) => void;
     onRemoveTimeClick: (e: React.MouseEvent<HTMLButtonElement>, option: TimeOption) => void;
     updateOption: (oldDate: Date, propertyName: keyof TimeOption, newTime?: TimeValue) => void;
-    options: TimeOption[];
+    addingTimesDisabled: boolean;
+    hasError: boolean;
 }
 
-const SelectedDate = ({ dateKey, dateOptions, onAddTimeClick, onRemoveTimeClick, updateOption, options }: SelectedDateProps) => {
+const SelectedDate = ({ dateKey, dateOptions, onAddTimeClick, onRemoveTimeClick, updateOption, addingTimesDisabled, hasError = false }: SelectedDateProps) => {
     const date = moment(dateKey).toDate();
     const monthName = moment(date).format('MMM');
     const dayNumber = moment(date).format('D');
@@ -30,14 +31,16 @@ const SelectedDate = ({ dateKey, dateOptions, onAddTimeClick, onRemoveTimeClick,
                         key={dateOption.startTime.toISOString()}
                         dateOption={dateOption}
                         onRemoveTimeClick={onRemoveTimeClick}
-                        updateOption={updateOption} />
+                        updateOption={updateOption}
+                        {...hasError && { className: "border-red-500" }}
+                    />
                 ))}
 
                 <div className={'flex gap-x-2'}>
                     <div className={'border border-gray-200 rounded-md h-fit'}>
                         <IconButton icon={Plus} weight={'bold'} fill={'#0D1216'} btnClassName={'px-3 py-2'}
                             onClick={(e) => onAddTimeClick(e, date, lastDateOption)}
-                            disabled={options.length >= 10}>
+                            disabled={addingTimesDisabled}>
                             Add times
                         </IconButton>
                     </div>

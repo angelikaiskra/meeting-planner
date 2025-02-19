@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import DayPicker from '@/components/ui/calendar/day-picker.tsx';
 import DividerLine from '@/components/ui/divider-line/divider-line.tsx';
-import { GroupedTimeOptions, TimeOption, TimeValue } from '@/types/time.ts';
+import { GroupedTimeOptions, TimeOption, TimeOptionError, TimeValue } from '@/types/time.ts';
 import NoDaysPlaceholder from './no-days-placeholder';
 import SelectedDate from './selected-date';
 import moment from 'moment';
@@ -9,10 +9,10 @@ import moment from 'moment';
 interface CalendarSectionProps {
   options: TimeOption[];
   setOptions: (value: TimeOption[]) => void;
-  errorMessage?: string;
+  error?: TimeOptionError;
 }
 
-const CalendarSection = React.forwardRef<HTMLDivElement, CalendarSectionProps>(({ options, setOptions, errorMessage }, ref) => {
+const CalendarSection = React.forwardRef<HTMLDivElement, CalendarSectionProps>(({ options, setOptions, error }, ref) => {
 
   const onSelectDay = (dates: Date[] | undefined) => {
     if (!dates) return;
@@ -80,6 +80,16 @@ const CalendarSection = React.forwardRef<HTMLDivElement, CalendarSectionProps>((
     setOptions(newOptions);
   };
 
+  const renderError = () => {
+    if (!error) return null;
+
+    return (
+      <p className="text-red-500 text-sm mt-2">
+        {Array.isArray(error) ? "Invalid time in selected date." : error.message}
+      </p>
+    );
+  };
+
   const groupByDate = (options: TimeOption[]): GroupedTimeOptions => {
     const groupedOptions: GroupedTimeOptions = {};
 
@@ -105,24 +115,25 @@ const CalendarSection = React.forwardRef<HTMLDivElement, CalendarSectionProps>((
           {options.length === 0 ? (
             <NoDaysPlaceholder />
           ) : (
-            Object.keys(groupedOptions).map((dateKey, index) => (
+            Object.entries(groupedOptions).map(([dateKey, dateOptions], index, arr) => (
               <React.Fragment key={dateKey}>
                 <SelectedDate
                   dateKey={dateKey}
-                  dateOptions={groupedOptions[dateKey]}
+                  dateOptions={dateOptions}
                   onAddTimeClick={onAddTimeClick}
                   onRemoveTimeClick={onRemoveTimeClick}
                   updateOption={updateOption}
-                  options={options}
+                  addingTimesDisabled={options.length >= 10}
+                  hasError={error && Array.isArray(error) && error[index]}
                 />
-                {index !== Object.keys(groupedOptions).length - 1 && <DividerLine color="bg-gray-100" />}
+                {(index !== arr.length - 1) && <DividerLine color='bg-gray-100' />}
               </React.Fragment>
             ))
           )}
         </div>
       </div>
 
-      {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
+      {renderError()}
     </>
   );
 });

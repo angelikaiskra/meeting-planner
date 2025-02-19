@@ -6,10 +6,15 @@ export interface PollSettings {
 }
 
 export interface MeetingTime {
-    type: "DATE" | "TIME_RANGE",
-    startTime?: string,
-    endTime?: string,
-    date?: string,
+    id: string;
+    pollId: string;
+    type: "DATE" | "TIME_RANGE";
+    startTime?: string;
+    endTime?: string;
+    date?: string;
+    votes: Array<{
+        id: string;
+    }>;
 }
 
 export interface MeetingPoll {
@@ -20,4 +25,13 @@ export interface MeetingPoll {
     status: "OPEN" | "CLOSED";
     options: MeetingTime[];
     settings: PollSettings;
+    createdAt: string;
+    updatedAt: string;
+    userId?: string;
+    user?: {
+        id: string;
+        name: string;
+    };
 }
+
+export type Vote = "YES" | "NO" | "MAYBE";

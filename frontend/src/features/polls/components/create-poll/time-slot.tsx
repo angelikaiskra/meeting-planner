@@ -4,15 +4,16 @@ import IconButton from '@/components/ui/button/icon-button.tsx';
 import { X } from '@phosphor-icons/react';
 import { TimeOption, TimeValue } from '@/types/time.ts';
 import moment from 'moment';
+import classNames from "classnames";
 
 interface TimeSlotProps {
     dateOption: TimeOption;
     onRemoveTimeClick: (e: React.MouseEvent<HTMLButtonElement>, option: TimeOption) => void;
     updateOption: (oldDate: Date, propertyName: keyof TimeOption, newTime?: TimeValue) => void;
+    className?: string;
 }
 
-const TimeSlot: React.FC<TimeSlotProps> = ({ dateOption, onRemoveTimeClick, updateOption }) => {
-
+const TimeSlot: React.FC<TimeSlotProps> = ({ dateOption, onRemoveTimeClick, updateOption, className }) => {
     const getTimePickerOption = (date: Date) => ({
         label: moment(date).format('HH:mm'),
         value: { hours: moment(date).hours(), minutes: moment(date).minutes() }
@@ -23,7 +24,10 @@ const TimeSlot: React.FC<TimeSlotProps> = ({ dateOption, onRemoveTimeClick, upda
 
     return (
         <div className="flex">
-            <div className="border border-gray-200 h-14 rounded-md flex items-center justify-between p-1 w-full max-lg:max-w-77">
+            <div className={classNames(
+                "border border-gray-200 h-14 rounded-md flex items-center justify-between p-1 w-full max-lg:max-w-77",
+                className
+            )}>
                 <TimePicker
                     selectedOption={startTimePickerVal}
                     onChange={(newTime) => updateOption(dateOption.startTime, 'startTime', newTime?.value)}
