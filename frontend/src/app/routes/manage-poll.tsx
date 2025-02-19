@@ -16,7 +16,7 @@ const ManagePollRoute = () => {
         <Header className={"bg-gray-100"} />
 
         <div className={"pt-36 pb-20"}>
-          <ContentWrapper className="max-w-2xl space-y-5">
+          <ContentWrapper className="max-w-[700px] space-y-5">
             <Alert variant="warning">
               Your administrator rights will be lost if you clear your cookies.
             </Alert>

@@ -11,7 +11,7 @@ export const generateTimeValues = (incrementValue: number = 30): SelectOption<Ti
   for (let hours = 0; hours < 24; hours++) {
     for (let minutes = 0; minutes < 60; minutes += incrementValue) {
       const time = formatHoursAndMinutes(hours, minutes);
-      options.push({ label: time, value: {hours: hours, minutes: minutes}, });
+      options.push({ label: time, value: { hours: hours, minutes: minutes }, });
     }
   }
   return options;

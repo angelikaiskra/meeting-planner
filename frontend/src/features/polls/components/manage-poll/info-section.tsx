@@ -20,7 +20,6 @@ const InfoSection = ({ pollId }: InfoSectionProps) => {
         );
     }
 
-    console.log("meetingPollQuery?.data", meetingPollQuery?.data);
     const meetingPoll = meetingPollQuery?.data;
 
     if (!meetingPoll) return null;

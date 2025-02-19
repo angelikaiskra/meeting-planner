@@ -27,7 +27,7 @@ const queryMeetingPolls = async (req: Request, res: Response, next: NextFunction
   try {
     const options = req.query;
     const user = req.user as User || null;
-    const ownerUuid =  user ? user.uuid : req.query.uuid as string;
+    const ownerUuid = user ? user.uuid : req.query.uuid as string;
 
     if (!ownerUuid) {
       throw new ApiError(httpStatus.UNAUTHORIZED, 'You need to log in or send your guest UUID in order to query polls');
@@ -43,7 +43,7 @@ const queryMeetingPolls = async (req: Request, res: Response, next: NextFunction
 const getMeetingPoll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User || null;
-    const ownerUuid =  user ? user.uuid : req.params.uuid as string;
+    const ownerUuid = user ? user.uuid : req.params.uuid as string;
 
     if (!ownerUuid) {
       throw new ApiError(httpStatus.UNAUTHORIZED, 'You don\'t have access to this poll');
@@ -56,7 +56,7 @@ const getMeetingPoll = async (req: Request, res: Response, next: NextFunction) =
     }
 
     res.send(meetingPoll);
-  }  catch (error) {
+  } catch (error) {
     next(error);
   }
 };
@@ -64,7 +64,7 @@ const getMeetingPoll = async (req: Request, res: Response, next: NextFunction) =
 const updateMeetingPoll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User || null;
-    const ownerUuid =  user ? user.uuid : req.params.uuid;
+    const ownerUuid = user ? user.uuid : req.params.uuid;
 
     if (!ownerUuid) {
       throw new ApiError(httpStatus.UNAUTHORIZED, 'You don\'t have access to this poll');
@@ -94,7 +94,7 @@ const updateMeetingPoll = async (req: Request, res: Response, next: NextFunction
 const deleteMeetingPoll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User || null;
-    const ownerUuid =  user ? user.uuid : req.params.uuid as string;
+    const ownerUuid = user ? user.uuid : req.params.uuid as string;
 
     if (!ownerUuid) {
       throw new ApiError(httpStatus.UNAUTHORIZED, 'You don\'t have access to this poll');
@@ -110,11 +110,6 @@ const deleteMeetingPoll = async (req: Request, res: Response, next: NextFunction
 const addVoteToMeetingPoll = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.user as User || null;
-    const ownerUuid =  user ? user.uuid : req.params.uuid as string;
-
-    if (!ownerUuid) {
-      throw new ApiError(httpStatus.UNAUTHORIZED, 'You don\'t have access to this poll');
-    }
 
     const meetingPoll = await pollService.getMeetingPollById(+req.params.pollId);
 
@@ -125,7 +120,7 @@ const addVoteToMeetingPoll = async (req: Request, res: Response, next: NextFunct
     const { optionId, vote } = req.body;
     const userInfo = {
       isGuest: !user,
-      ...user ? { userId: user.id } : { guestUuid: ownerUuid, guestName: req.body.name },
+      ...user ? { userId: user.id } : { guestName: req.body.name },
     };
 
     const updatedPollOption = await pollService.addUserVote(optionId, userInfo, vote);

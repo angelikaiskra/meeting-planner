@@ -12,17 +12,17 @@ type IconButton = Omit<IconProps, 'onClick'> & {
 }
 
 const IconButton = ({
-                      icon: Icon,
-                      children,
-                      btnClassName,
-                      iconClassName,
-                      onClick,
-                      disabled = false,
-                      ...props
-                    }: IconButton) => {
+  icon: Icon,
+  children,
+  btnClassName,
+  iconClassName,
+  onClick,
+  disabled = false,
+  ...props
+}: IconButton) => {
   return (
     <button onClick={onClick} disabled={disabled}
-            className={classNames('bg-white cursor-pointer p-1.5 hover:bg-gray-100 rounded-lg flex items-center text-sm gap-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:bg-gray-200 disabled:rounded-md disabled:cursor-default', btnClassName)}>
+      className={classNames('bg-white cursor-pointer p-1.5 hover:bg-gray-100 rounded-lg flex items-center text-sm gap-x-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:bg-gray-200 disabled:rounded-md disabled:cursor-default', btnClassName)}>
       <Icon className={classNames(iconClassName)} {...props} />
       {children}
     </button>

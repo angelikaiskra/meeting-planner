@@ -21,7 +21,7 @@ export const MultiStateCheckboxBlank = ({ value, onClick, options, className = "
   return (
     <button
       type="button"
-      className={classNames("flex size-7 items-center justify-center rounded-md border cursor-pointer ring-gray-200 focus:ring-3", className)}
+      className={classNames("flex size-7 items-center justify-center rounded-md border cursor-pointer focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2", className)}
       onClick={() => onClick?.(nextValue)}
       {...props}>
 
